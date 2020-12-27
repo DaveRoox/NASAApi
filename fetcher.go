@@ -3,6 +3,7 @@ package nasaapi
 import (
 	"encoding/json"
 	"fmt"
+	"nasaapi/types"
 	"net/http"
 	"net/url"
 	"time"
@@ -10,10 +11,10 @@ import (
 
 // Fetcher represent an interface that exposes methods to access NASA's public APIs
 type Fetcher interface {
-	Apod(date time.Time, hd bool) (*Apod, error)
-	NeoFeed(startDate, endDate time.Time) (*NeoFeed, error)
-	NeoLookup(asteroidID int64) (*NeoLookup, error)
-	NeoBrowse() (*NeoBrowse, error)
+	Apod(date time.Time, hd bool) (*types.Apod, error)
+	NeoFeed(startDate, endDate time.Time) (*types.NeoFeed, error)
+	NeoLookup(asteroidID int64) (*types.NeoLookup, error)
+	NeoBrowse() (*types.NeoBrowse, error)
 }
 
 // GetFetcher takes an api key and returns a Fetcher object
