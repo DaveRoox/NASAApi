@@ -43,7 +43,6 @@ func (f *fetcher) buildURL(path string, params map[string]string) *url.URL {
 }
 
 func getAndParse(u *url.URL, a interface{}) error {
-	fmt.Println("Requesting %v", u.String())
 	resp, err := http.Get(u.String())
 	if err != nil {
 		return err
