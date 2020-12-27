@@ -1,23 +1,5 @@
 package donki
 
-// Catalog is the type for the CMEAnalyses' `catalog` parameter
-type Catalog interface {
-	Catalog() catalog
-}
-
-type catalog string
-
-func (c catalog) Catalog() catalog {
-	return c
-}
-
-// Enum values for CMEAnalyses' `catalog` parameters
-const (
-	All             = catalog("ALL")
-	SWRCCatalog     = catalog("SWRC_CATALOG")
-	JangEtAlCatalog = catalog("JANG_ET_AL_CATALOG")
-)
-
 // CoronalMassEjectionsAnalyses represent an object returned by a valid CMEAnalysis request
 type CoronalMassEjectionsAnalyses []cmeaCMEAnalysis
 

@@ -17,12 +17,7 @@ type Fetcher interface {
 	NeoLookup(asteroidID int64) (*types.NeoLookup, error)
 	NeoBrowse() (*types.NeoBrowse, error)
 	CoronalMassEjections(startDate, endDate time.Time) (*donki.CoronalMassEjections, error)
-	CoronalMassEjectionsAnalyses(
-		startDate, endDate time.Time,
-		mostAccurateOnly, completeEntryOnly bool,
-		lowerSpeed, lowerHalfAngle int64,
-		catalog donki.Catalog,
-		keyword string) (*donki.CoronalMassEjectionsAnalyses, error)
+	CoronalMassEjectionsAnalyses(startDate, endDate time.Time, mostAccurateOnly, completeEntryOnly bool, lowerSpeed, lowerHalfAngle int64, catalog catalog, keyword string) (*donki.CoronalMassEjectionsAnalyses, error)
 }
 
 // New takes an api key and returns a newly created Fetcher object binded to the key

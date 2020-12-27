@@ -7,6 +7,16 @@ import (
 	"time"
 )
 
+// Catalog is the type for the CMEAnalyses' `catalog` parameter
+type catalog string
+
+// Enum values for CMEAnalyses' `catalog` parameters
+const (
+	All             = catalog("ALL")
+	SWRCCatalog     = catalog("SWRC_CATALOG")
+	JangEtAlCatalog = catalog("JANG_ET_AL_CATALOG")
+)
+
 func (f *fetcher) CoronalMassEjections(startDate, endDate time.Time) (*donki.CoronalMassEjections, error) {
 
 	u := f.buildURL(
@@ -32,7 +42,7 @@ func (f *fetcher) CoronalMassEjectionsAnalyses(
 	startDate, endDate time.Time,
 	mostAccurateOnly, completeEntryOnly bool,
 	lowerSpeed, lowerHalfAngle int64,
-	catalog donki.Catalog,
+	catalog catalog,
 	keyword string) (*donki.CoronalMassEjectionsAnalyses, error) {
 
 	u := f.buildURL(
@@ -44,7 +54,7 @@ func (f *fetcher) CoronalMassEjectionsAnalyses(
 			"completeEntryOnly": strconv.FormatBool(completeEntryOnly),
 			"speed":             strconv.FormatInt(lowerSpeed, 10),
 			"halfAngle":         strconv.FormatInt(lowerHalfAngle, 10),
-			"catalog":           string(catalog.Catalog()),
+			"catalog":           string(catalog),
 			"keyword":           keyword,
 		},
 	)
