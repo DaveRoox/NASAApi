@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"nasaapi/types"
+	donki "nasaapi/types/donki"
 	"net/http"
 	"net/url"
 	"time"
@@ -15,10 +16,17 @@ type Fetcher interface {
 	NeoFeed(startDate, endDate time.Time) (*types.NeoFeed, error)
 	NeoLookup(asteroidID int64) (*types.NeoLookup, error)
 	NeoBrowse() (*types.NeoBrowse, error)
+	CoronalMassEjections(startDate, endDate time.Time) (*donki.CoronalMassEjections, error)
+	CoronalMassEjectionsAnalyses(
+		startDate, endDate time.Time,
+		mostAccurateOnly, completeEntryOnly bool,
+		lowerSpeed, lowerHalfAngle int64,
+		catalog donki.Catalog,
+		keyword string) (*donki.CoronalMassEjectionsAnalyses, error)
 }
 
-// GetFetcher takes an api key and returns a Fetcher object
-func GetFetcher(apiKey string) Fetcher {
+// New takes an api key and returns a newly created Fetcher object binded to the key
+func New(apiKey string) Fetcher {
 	return &fetcher{
 		key: apiKey,
 	}
@@ -45,6 +53,7 @@ func (f *fetcher) buildURL(path string, params map[string]string) *url.URL {
 }
 
 func getAndParse(u string, a interface{}) error {
+	fmt.Printf("Request at %v\n", u)
 	resp, err := http.Get(u)
 	if err != nil {
 		return err
