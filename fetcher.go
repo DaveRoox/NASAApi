@@ -10,8 +10,9 @@ import (
 
 // Fetcher represent an interface that exposes methods to access NASA's public APIs
 type Fetcher interface {
-	Apod(time.Time, bool) (*Apod, error)
+	Apod(day time.Time, hd bool) (*Apod, error)
 	ApodDefault() (*Apod, error)
+	NeoFeed(startDate, endDate time.Time) (*NeoFeed, error)
 }
 
 // GetFetcher takes an api key and returns a Fetcher object that stores is
@@ -43,6 +44,7 @@ func (f *fetcher) buildURL(path string, params map[string]string) *url.URL {
 }
 
 func getAndParse(u *url.URL, a interface{}) error {
+	fmt.Println("Requesting %v", u.String())
 	resp, err := http.Get(u.String())
 	if err != nil {
 		return err
@@ -53,3 +55,5 @@ func getAndParse(u *url.URL, a interface{}) error {
 	defer resp.Body.Close()
 	return json.NewDecoder(resp.Body).Decode(a)
 }
+
+const dateFormat = "2006-01-02"
