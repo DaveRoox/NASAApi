@@ -21,7 +21,20 @@ type NeoBrowse struct {
 }
 
 // NeoLookup represents an object returned by a valid NeoLookup request
-type NeoLookup asteroid
+type NeoLookup struct {
+	Links                          links               `json:"links"`
+	ID                             string              `json:"id"`
+	NeoReferenceID                 string              `json:"neo_reference_id"`
+	Name                           string              `json:"name"`
+	Designation                    string              `json:"designation"`
+	NasaJplURL                     string              `json:"nasa_jpl_url"`
+	AbsoluteMagnitudeH             float64             `json:"absolute_magnitude_h"`
+	EstimatedDiameter              estimatedDiameter   `json:"estimated_diameter"`
+	IsPotentiallyHazardousAsteroid bool                `json:"is_potentially_hazardous_asteroid"`
+	CloseApproachData              []closeApproachData `json:"close_approach_data"`
+	OrbitalData                    orbitalData         `json:"orbital_data"`
+	IsSentryObject                 bool                `json:"is_sentry_object"`
+}
 
 type links struct {
 	Next string `json:"next"`
@@ -39,21 +52,6 @@ type nearEarthObject struct {
 	EstimatedDiameter              estimatedDiameter   `json:"estimated_diameter"`
 	IsPotentiallyHazardousAsteroid bool                `json:"is_potentially_hazardous_asteroid"`
 	CloseApproachData              []closeApproachData `json:"close_approach_data"`
-	IsSentryObject                 bool                `json:"is_sentry_object"`
-}
-
-type asteroid struct {
-	Links                          links               `json:"links"`
-	ID                             string              `json:"id"`
-	NeoReferenceID                 string              `json:"neo_reference_id"`
-	Name                           string              `json:"name"`
-	Designation                    string              `json:"designation"`
-	NasaJplURL                     string              `json:"nasa_jpl_url"`
-	AbsoluteMagnitudeH             float64             `json:"absolute_magnitude_h"`
-	EstimatedDiameter              estimatedDiameter   `json:"estimated_diameter"`
-	IsPotentiallyHazardousAsteroid bool                `json:"is_potentially_hazardous_asteroid"`
-	CloseApproachData              []closeApproachData `json:"close_approach_data"`
-	OrbitalData                    orbitalData         `json:"orbital_data"`
 	IsSentryObject                 bool                `json:"is_sentry_object"`
 }
 
