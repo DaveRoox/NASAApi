@@ -18,10 +18,6 @@ type Apod struct {
 	URL            string `json:"url"`
 }
 
-func (f *fetcher) ApodDefault() (*Apod, error) {
-	return f.Apod(time.Now(), false)
-}
-
 func (f *fetcher) Apod(date time.Time, hd bool) (*Apod, error) {
 
 	u := f.buildURL(

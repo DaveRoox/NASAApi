@@ -11,7 +11,6 @@ import (
 // Fetcher represent an interface that exposes methods to access NASA's public APIs
 type Fetcher interface {
 	Apod(date time.Time, hd bool) (*Apod, error)
-	ApodDefault() (*Apod, error)
 	NeoFeed(startDate, endDate time.Time) (*NeoFeed, error)
 	NeoLookup(asteroidID int64) (*NeoLookup, error)
 	NeoBrowse() (*NeoBrowse, error)
@@ -45,7 +44,6 @@ func (f *fetcher) buildURL(path string, params map[string]string) *url.URL {
 }
 
 func getAndParse(u string, a interface{}) error {
-	fmt.Printf("Requesting at %v\n", u)
 	resp, err := http.Get(u)
 	if err != nil {
 		return err
