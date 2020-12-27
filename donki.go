@@ -44,7 +44,7 @@ func (f *fetcher) CoronalMassEjectionsAnalyses(
 			"completeEntryOnly": strconv.FormatBool(completeEntryOnly),
 			"speed":             strconv.FormatInt(lowerSpeed, 10),
 			"halfAngle":         strconv.FormatInt(lowerHalfAngle, 10),
-			"catalog":           string(catalog),
+			"catalog":           string(catalog.Catalog()),
 			"keyword":           keyword,
 		},
 	)
